@@ -1,38 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <script>
-      let txt = "";
-      async function APIKald() {
-        ind = document.getElementById("ind").value;
-        url = "https://api.dataforsyningen.dk/postnumre/" + ind;
-        var req = new Request(url);
+
+<head>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+  </style>
+
+  <script>
+    //Ændret diverse variable navne til at være mere beskrivende og på engelsk
+
+    let searchResult = "";
+
+
+    async function apiFetch() {
+      zipcode = document.getElementById("zipcode").value;
+      url = "https://api.dataforsyningen.dk/postnumre/" + zipcode;
+      var req = new Request(url);
+
+      //Tilføjet Try/catch block hvis der nu skulle ske fejl
+      try {
         const response = await fetch(req);
-        const Objekt = await response.json();
-        document.getElementById("id1").innerHTML =
-          Objekt.nr + " " + Objekt.navn;
-        txt = "";
-        Objekt.kommuner.forEach(myFunction);
-        document.getElementById("ud").innerHTML = txt;
+        const result = await response.json();
+        document.getElementById("userInput").innerHTML =
+          result.nr + " " + result.navn;
+        searchResult = "";
+        result.kommuner.forEach(myFunction);
+        document.getElementById("returnValue").innerHTML = searchResult;
+        // Tilføjet console.log() til at logge data
+        console.log(result);
+      } catch (error) {
+        console.log("Fejl:", error);
       }
-      function myFunction(value, index, array) {
-        txt += index + 1 + " " + value.navn + "<br>";
-      }
-    </script>
-    <meta charset="utf-8" />
-    <title>MAGS - GET /u kommentar</title>
-  </head>
-  <body>
-    <a
-      target="_blank"
-      href="https://www.notion.so/mercantec/Forst-et-API-kald-skrevet-i-JS-6babd52d4eba45bca873ab655d2cd278"
-    >
-      Opgave beskrivelse
-    </a>
+    }
+
+    //Funktion til at construere searchResult strengen på baggrund af dataen fra GET requesten
+    function myFunction(value, index, array) {
+      searchResult += index + 1 + " " + value.navn + "<br>";
+    }
+  </script>
+
+  <meta charset="utf-8" />
+  <title>MAGS - GET /u kommentar</title>
+</head>
+
+<body>
+  <div class="container">
+    <div>
+      <font size="+2"> Find byer via postkode: </font>
+    </div>
     <br />
-    <input id="ind" type="text" value="8800" />
-    <button type="button" onclick="APIKald()">Button</button>
-    <p id="id1"></p>
-    <p id="ud"></p>
-  </body>
+    <input id="zipcode" type="text" value="8800" />
+    <button type="button" onclick="apiFetch()">Søg</button>
+    <p id="userInput"></p>
+    <p id="returnValue"></p>
+  </div>
+
+</body>
+
 </html>
