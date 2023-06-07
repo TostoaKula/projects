@@ -8,30 +8,48 @@
     <script src='apiScript.js'></script>
 </head>
 <body>
-    <p id='meal'></p>
+    
+    <input type="text" id="searchInput">
+    <button onclick="getMeal()">Search</button>
+    <p id="meal"></p>
+    
     <script>
-      const url = "https://www.themealdb.com/api/json/v1/1/search.php?f=a";
-
+        //url til meal hjemmeside
+        const url = "https://www.themealdb.com/api/json/v1/1/search.php";
+        
+        //den asynkrone funktion der køre efter tryk på knappen
         async function getMeal() {
-            const req = new Request(url);
-            const response = await fetch(req);
-            const result = await response.json();
-            console.log(result)
-
-            meals = result.meals;
-            mealNames = [];
-
-            for (let i = 0; i < meals.length; i++) {
-                mealNames.push(meals[i].strMeal);
-            }
-
-            const meal = mealNames[""];
-            document.getElementById("meal").innerHTML = meal;
-
-            console.log(mealNames);
+        //her tager den værdien af hvad der er blevet skrevet ind    
+        const searchInput = document.getElementById("searchInput").value;
+        //her gennemsøger den hele urlen og benytter sig af dens søgesystem, hvor man kan søge efter enkelt bogstaver eller mad typer f.eks beef
+        const searchUrl = `${url}?s=${searchInput}`;
+        
+        //her fetcher den URLen og laver den om til et resultat
+        const req = new Request(searchUrl);
+        const response = await fetch(req);
+        const result = await response.json();
+        console.log(result);
+        
+        //her er meals som resultat som så bliver lavet til et nyt array 
+        const meals = result.meals;
+        const mealNames = [];
+        
+        //søge funktionen 
+        if (meals) {
+          for (let i = 0; i < meals.length; i++) {
+            mealNames.push(meals[i].strMeal);
+          }
+        } else {
+          mealNames.push("No results found.");
         }
+        // her udskriver den alle de meals der indgår med det søgte ord/bogstav
+        const meal = mealNames.join(", ");
+        document.getElementById("meal").innerHTML = meal;
+    
+        console.log(mealNames);
+      }
             
-        getMeal();
+        
         
         function searchFood(){
 
