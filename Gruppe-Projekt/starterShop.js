@@ -2,7 +2,7 @@
        
        
        
-       class Starters {
+      class Starters {
         constructor(value, name, front) {
           this.value = value;
           this.name = name;
