@@ -1,24 +1,3 @@
-/* function getPokeman(){
-    const id= "pikachu"
-    fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    
-    .then((resp) => resp.json())
-    .then((data) => console.log(data));
-    
-}
-function GetAll (){
-fetch(`https://pokeapi.co/api/v2/pokemon/?limit=811/`)
-    .then((resp) => resp.json())
-    .then((name) => console.log(name))
-    console.log (name.result)}
-
-    function fetchPokemons(number) {
-    for (let i = 6; i <= number; i++) {
-        fetchPokemons(i);
-        
-    }
-}
-GetAll();*/
 
 const url = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0.";
         
