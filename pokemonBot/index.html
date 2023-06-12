@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Pokémon Battle</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+</head>
+
+<body>
+    <h1>Pokémon Battle</h1>
+    <div id="battleUI" class="battle-container">
+        <div class="battle-screen">
+            <div class="player-pokemon">
+                <div class="pokemon-container">
+                    <div id="playerSprite" class="pokemon-sprite"></div>
+                    <div class="pokemon-info">
+                        <span id="playerHP" class="pokemon-hp"></span>
+                        <span id="playerName" class="pokemon-name"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="opponent-pokemon">
+                <div class="pokemon-container">
+                    <div id="opponentSprite" class="pokemon-sprite"></div>
+                    <div class="pokemon-info">
+                        <span id="opponentHP" class="pokemon-hp"></span>
+                        <span id="opponentName" class="pokemon-name"></span>
+                        <div id="opponentRemaining">Pokémon Remaining: <span id="opponentRemainingCount"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="battle-controls">
+            <label for="moveSelect">Select Move:</label>
+            <select id="moveSelect">
+
+            </select>
+            <button id="useMoveButton">Use Move</button>
+
+            <label for="pokemonSelect">Switch Pokémon:</label>
+            <select id="pokemonSelect">
+
+            </select>
+
+            <button id="switchPokemonButton">Switch Pokémon</button>
+        </div>
+
+        <div id="battleLog"></div>
+    </div>
+    <div id="playerWallet" class="player-wallet">Wallet: $500</div>
+    <div id="storeSelect" class="store">Store</div>
+    <button id="newOpponentButton" class="new-opponent">Fight New Opponent</button>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
