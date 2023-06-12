@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src='https://cdn.plot.ly/plotly-2.20.0.min.js'></script>
+    <script src='script.js'></script>
+</head>
+<body>
+  <p id='benzDiv'></p>
+  <p id='live'></p>
+    <script>
+
+      const url = "https://magsapi.com/api/miles95"
+
+      async function getPrice(){
+        var req = new Request(url)
+        const response = await fetch(req)
+        const result = await response.json();
+        console.log(result)
+
+        priser = [];
+        dato = [];
+        for (let i = 0; i < result.length; i++){
+
+        priser.push(result[i].PriceGross)
+        dato.push(result[i].Date)
+        }
+        var trace1 = {
+        x: dato,
+        y: priser,
+        type: 'scatter'
+        };
+
+        var data = [trace1];
+
+        Plotly.newPlot('benzDiv', data);
+
+        const livePris = priser[priser.length - 1]
+        document.getElementById("live").innerHTML = "seneste pris er" + livePris;
+        
+        }
+       
+      
+      getPrice()
+     
+      
+      </script>
+    
+</body>
+</htmb>

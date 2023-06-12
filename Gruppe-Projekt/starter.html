@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="starters"></div>
+    <script>
+        const url = "https://pokeapi.co/api/v2/pokemon";
+   
+        //her fetcher vi dataen fra URLen og laver til et array
+async function getStarters() {
+        const response = await fetch(url);
+        const result = await response.json();
+        console.log(result);
+        
+        //her henter vi vores startere ud fra arrayet
+        const starters = [
+        result.results[0].name,
+        result.results[3].name,
+        result.results[6].name,
+        result.results[9].name,
+        result.results[12].name,
+        result.results[15].name 
+        ];
+        console.log(starters)
+        //her laver vi en liste med starterne
+        const list = document.getElementById("starters"); 
+        //her kører den for hver gang   
+        starters.forEach(function(starter) {
+
+        var button = document.createElement("button");
+
+        button.textContent = starter;
+
+        list.appendChild(button);
+        
+        });
+        
+        
+
+ 
+   
+   for (let i = 0; i < starters.length; i++) {
+    const got = await fetch(`https://pokeapi.co/api/v2/pokemon/${starters[i]}/`)
+   const svar = await got.json();
+   console.log(svar)
+   }
+   
+}
+
+
+getStarters();
+
+
+        function shop(){
+        
+        }
+
+        
+        function items(){
+
+        }
+    </script>
+</body>
+</html>
