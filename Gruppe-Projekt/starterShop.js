@@ -1,4 +1,4 @@
-  const url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0.";
+const url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0.";
 
   class Pokemon {
     constructor(name) {
@@ -54,4 +54,4 @@
   }
 
 
-        
+
