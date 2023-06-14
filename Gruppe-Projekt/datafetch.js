@@ -1,8 +1,9 @@
-const url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0.";
-let result = "";
-export let starters = [];
-let svar = "";
+import { createpokemons } from "./createItems.js";
 
+const url = "https://pokeapi.co/api/v2/pokemon?limit=1281&offset=0.";
+export let result = "";
+export let starters = [];
+export let svar = "";
 
 function gamestart() {
   getinfo();
@@ -12,10 +13,11 @@ function gamestart() {
 async function getinfo() {
   const response = await fetch(url);
   result = await response.json();
-  console.log(result);
+
   getStarters();
-  getStats();
+  await getStats();
   makeButtons();
+  createpokemons();
 }
 
 async function getStats() {
@@ -24,9 +26,9 @@ async function getStats() {
       `https://pokeapi.co/api/v2/pokemon/${starters[i]}/`
     );
     svar = await got.json();
-    console.log(svar)
-    console.log(svar.stats[0])
-  } 
+    console.log(svar);
+    console.log(svar.stats[0]);
+  }
 }
 
 async function makeButtons() {

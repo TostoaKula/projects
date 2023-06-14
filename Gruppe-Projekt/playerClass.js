@@ -1,9 +1,10 @@
 import { starters } from "./datafetch.js";
 
 export class Player {
-    constructor() {
-      this.hp = 100;
-      this.dmg = 35;
+    constructor(name,hp) {
+       this.name=name;
+       this.hp = hp;
+     
     }
   
     gainHP(amount) {
